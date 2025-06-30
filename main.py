@@ -4,17 +4,22 @@ Updated to handle Excel files and proper date formatting
 """
 
 import streamlit as st
-from cleaning import data_cleaning
 import pandas as pd
 from io import BytesIO
+import sys
+import os
+
+# Add the directory containing cleaning.py to Python path
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
 try:
     from cleaning import data_cleaning
-except ImportError:
-    from .cleaning import data_cleaning
+except ImportError as e:
+    st.error(f"Import Error: {str(e)}")
+    st.stop()
 
 st.title("CABIN EXCEEDANCE REPORT")
 
-# Changed to accept Excel files
 upload_file = st.file_uploader("Choose a file to Upload", type=["xlsx", "xls"])
 
 if upload_file is not None:
@@ -27,18 +32,14 @@ if upload_file is not None:
         st.write("Merged_data")
         st.dataframe(merged_data.head())
         
-        # Create Excel writer object for download
         output = BytesIO()
         with pd.ExcelWriter(output, engine='openpyxl') as writer:
             clean_data.to_excel(writer, sheet_name='Clean_Data', index=False)
             merged_data.to_excel(writer, sheet_name='Merged_Data', index=False)
         
-        # Get the Excel binary data
-        excel_data = output.getvalue()
-        
         st.download_button(
             label='Download Clean File as Excel',
-            data=excel_data,
+            data=output.getvalue(),
             file_name='Crew_Exceedance_Report.xlsx',
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
