@@ -5,6 +5,7 @@ Updated to handle Excel files and proper date formatting
 
 import streamlit as st
 from cleaning import data_cleaning
+from app.cleaning import data_cleaning
 import pandas as pd
 from io import BytesIO
 
