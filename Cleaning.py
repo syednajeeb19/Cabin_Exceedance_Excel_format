@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Updated to handle Excel files and proper date formatting
+@author: SyedNajeebURehman
 """
 
 import pandas as pd
