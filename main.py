@@ -22,14 +22,28 @@ if upload_file:
         
         # Create download button
         output = BytesIO()
+        output1= BytesIO()
         with pd.ExcelWriter(output, engine='openpyxl') as writer:
             clean_data.to_excel(writer, sheet_name='Clean_Data', index=False)
-            merged_data.to_excel(writer, sheet_name='Merged_Data', index=False)
+            )
         
         st.download_button(
             "Download Full Report",
             output.getvalue(),
-            "Crew_Exceedance_Report.xlsx",
+            "Full_Report.xlsx",
+            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        )
+
+    
+        with pd.ExcelWriter(output1, engine='openpyxl') as writer:
+            merged_data.to_excel(writer, sheet_name='Merged_Data', index=False)
+
+            )
+        
+        st.download_button(
+            "Cabin Exceedance Report",
+            output1.getvalue(),
+            "Cabin_Exceedance_Report.xlsx",
             "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
     except Exception as e:
