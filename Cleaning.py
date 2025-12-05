@@ -17,14 +17,16 @@ def data_cleaning(src_path):
     df['Flight Date'] = pd.to_datetime(df['Flight Date'], format="%d/%m/%Y", yearfirst=False)
     df['Flight Date'] = df['Flight Date'].dt.strftime('%d-%b-%Y')
 
-    # Clean up column names (remove extra whitespace and newlines)
-    df.columns = df.columns.str.strip().str.replace('\n', ' ')
-    
-    # Drop specified columns if they exist
+       # Drop specified columns if they exist
     df.drop(columns = ['Reporting Time', 'Time Pattern',
                        'FT Exceedance\n(28 days)\n(in HH:mm)\n        ',
        'FDP Exceedance\n(28 days)\n(in HH:mm)\n        '
-       ], inplace = True,axis=1)
+       ], inplace = True)
+
+    # Clean up column names (remove extra whitespace and newlines)
+    df.columns = df.columns.str.strip().str.replace('\n', ' ')
+    
+ 
     
     # Data cleaning operations
     df['Location Pattern'] = df['Location Pattern'].str.rstrip(' , ')
