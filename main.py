@@ -25,7 +25,7 @@ if upload_file:
         output1= BytesIO()
         with pd.ExcelWriter(output, engine='openpyxl') as writer:
             clean_data.to_excel(writer, sheet_name='Clean_Data', index=False)
-            )
+            
         
         st.download_button(
             "Download Full Report",
