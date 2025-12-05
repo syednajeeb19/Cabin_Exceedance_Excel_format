@@ -5,7 +5,7 @@ Created on Tue Oct 22 18:32:15 2024
 @author: SyedNajeebURehman
 """
 import streamlit as st
-from cleaning import data_cleaning
+from Cleaning import data_cleaning
 import pandas as pd
 from io import BytesIO
 
