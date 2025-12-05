@@ -38,7 +38,7 @@ if upload_file:
         with pd.ExcelWriter(output1, engine='openpyxl') as writer:
             merged_data.to_excel(writer, sheet_name='Merged_Data', index=False)
 
-            )
+            
         
         st.download_button(
             "Cabin Exceedance Report",
