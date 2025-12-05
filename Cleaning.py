@@ -21,13 +21,9 @@ def data_cleaning(src_path):
     df.columns = df.columns.str.strip().str.replace('\n', ' ')
     
     # Drop specified columns if they exist
-    cols_to_drop = [
-        'Reporting Time', 
-        'Time Pattern', 
-        'FT Exceedance (Single Event) (in HH:mm)',
-        'FDP Exceedance (Single Event) (in HH:mm)'
-    ]
-    df.drop(columns=[col for col in cols_to_drop if col in df.columns], inplace=True)
+    df.drop(columns = ['Reporting Time', 'Time Pattern',
+       'FT Exceedance\n(28 days)\n(in HH:mm)\n        ',
+       'FDP Exceedance\n(28 days)\n(in HH:mm)\n        '], inplace = True)
     
     # Data cleaning operations
     df['Location Pattern'] = df['Location Pattern'].str.rstrip(' , ')
