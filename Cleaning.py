@@ -11,10 +11,12 @@ def data_cleaning(src_path):
     # Read Excel file with proper date parsing
     df = pd.read_excel(
         src_path,
-        parse_dates=['Flight Date'],
-        date_parser=lambda x: pd.to_datetime(x, format='%m/%d/%Y', errors='coerce')
+       
     )
-    
+
+    df['Flight Date'] = pd.to_datetime(df['Flight Date'], format="%d/%m/%Y", yearfirst=False)
+    df['Flight Date'] = df['Flight Date'].dt.strftime('%d-%b-%Y')
+
     # Clean up column names (remove extra whitespace and newlines)
     df.columns = df.columns.str.strip().str.replace('\n', ' ')
     
