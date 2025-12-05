@@ -24,7 +24,7 @@ def data_cleaning(src_path):
     df.drop(columns = ['Reporting Time', 'Time Pattern',
                        'FT Exceedance\n(28 days)\n(in HH:mm)\n        ',
        'FDP Exceedance\n(28 days)\n(in HH:mm)\n        '
-       ], inplace = True)
+       ], inplace = True,axis=1)
     
     # Data cleaning operations
     df['Location Pattern'] = df['Location Pattern'].str.rstrip(' , ')
